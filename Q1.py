@@ -1,7 +1,7 @@
 from pwn import *
 from Crypto.Hash import SHA256
-ip = "localhost"
-port = 5000 
+ip = '172.26.201.17'
+port = 2133
 
 io = remote(ip, port)
 
