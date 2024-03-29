@@ -21,10 +21,11 @@ def hash_block(m, prevH):
     return cipher.encrypt(prevH)
 
 cmds = "LAUGH" + " " * 12 + "FLAG"
-
+#on server will add the 11 random key on the front for make it full block
 io.sendline(cmds.encode())
 
 added_cmd = " " * 12 + "FLAG"
+#I encrypt the  added_cmd with the token(hashtext)
 hashans = hash_block(added_cmd.encode(), hashtext)
 
 io.sendline(hashans.hex())

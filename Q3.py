@@ -31,13 +31,12 @@ user1, user2 = find_collision()
 print("User1:", user1)
 print("User2:", user2)
 
-# Send the found usernames to the server
 io.sendline(user1)
 io.sendline(user2)
 
-# Receive the response from the server
+
 response = io.recvall().decode("utf-8")
 print(response)
 
-# Close the connection
+
 io.close()

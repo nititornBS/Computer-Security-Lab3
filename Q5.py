@@ -16,7 +16,7 @@ data1 = io.recvline().decode("utf-8")
 
 key = b'oak1234567890abc'
 msg = 'Welcome to the Jungle!'
-
+# hash by the HMAC
 def mac(key, message):
     h = HMAC.new(key, message, SHA256)
     return b64encode(h.digest()).decode('utf-8')
@@ -27,7 +27,7 @@ data1 = io.recvline().decode("utf-8")
 data1= io.recvline().decode("utf-8")
 data1= io.recvline().decode("utf-8")
 print(data1)
-# Close the connection
+
 nonceb64 = 'DpOK8NIOuSOQlTq+BphKWw=='
 header = 'PleaseSendThisToIP21.36.222.155'
 nonce = b64decode(nonceb64)
@@ -35,8 +35,11 @@ header = str.encode(header)
 
 cipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
 cipher.update(header)
+# calculate an authentication tag
 ct, mt = cipher.encrypt_and_digest(msg.encode())
+# ciphertext
 ct = b64encode(ct).decode('utf-8')
+# mac_tag
 mt = b64encode(mt).decode('utf-8')
 
 io.sendline(ct.encode())
